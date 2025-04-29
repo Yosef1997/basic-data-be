@@ -2,6 +2,7 @@ package com.example.basicData.project.controller;
 
 import com.example.basicData.project.dto.ProjectDto;
 import com.example.basicData.project.dto.ProjectResponseDto;
+import com.example.basicData.project.dto.ProjectsStudentDto;
 import com.example.basicData.project.service.ProjectService;
 import com.example.basicData.response.Response;
 import com.example.basicData.student.dto.StudentDto;
@@ -25,7 +26,7 @@ public class ProjectController {
     }
 
     @GetMapping("/{nrp}")
-    public ResponseEntity<Response<List<ProjectResponseDto>>> getProjectsByStudentsNrp(@PathVariable Long nrp) {
+    public ResponseEntity<Response<List<ProjectsStudentDto>>> getProjectsByStudentsNrp(@PathVariable Long nrp) {
         return Response.successResponse("All student's projects", projectService.getProjectsByStudentNrp(nrp));
     }
 

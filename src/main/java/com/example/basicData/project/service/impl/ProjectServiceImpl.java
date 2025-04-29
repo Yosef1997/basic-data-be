@@ -3,6 +3,7 @@ package com.example.basicData.project.service.impl;
 import com.example.basicData.exceptions.notFoundException.NotFoundException;
 import com.example.basicData.project.dto.ProjectDto;
 import com.example.basicData.project.dto.ProjectResponseDto;
+import com.example.basicData.project.dto.ProjectsStudentDto;
 import com.example.basicData.project.entity.Project;
 import com.example.basicData.project.repository.ProjectRepository;
 import com.example.basicData.project.service.ProjectService;
@@ -25,9 +26,9 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public List<ProjectResponseDto> getProjectsByStudentNrp(Long studentNrp) {
+    public List<ProjectsStudentDto> getProjectsByStudentNrp(Long studentNrp) {
         studentService.getStudentByNrp(studentNrp);
-        return projectRepository.findAllByStudentNrp(studentNrp).stream().map(this::mapToProjectResponseDto).toList();
+        return projectRepository.findAllByStudentNrp(studentNrp).stream().map(this::mapToProjectsStudentDto).toList();
     }
 
     @Override
@@ -49,6 +50,14 @@ public class ProjectServiceImpl implements ProjectService {
         response.setProjectName(project.getProjectName());
         response.setStudentName(project.getStudent().getName());
         response.setStudentNrp(project.getStudent().getNrp());
+        return response;
+    }
+
+    public ProjectsStudentDto mapToProjectsStudentDto(Project project) {
+        ProjectsStudentDto response = new ProjectsStudentDto();
+        response.setId(project.getId());
+        response.setName(project.getProjectName());
+        response.setNrp(project.getStudent().getNrp());
         return response;
     }
 }

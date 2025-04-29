@@ -24,7 +24,6 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public StudentDto addStudent(StudentDto studentDto) {
         Student request = studentDto.toEntity();
-        request.setNrp(ThreadLocalRandom.current().nextLong(1_000_000_000L, 10_000_000_000L));
         Student newStudent = studentRepository.save(request);
         return mapToStudentDto(newStudent);
     }
